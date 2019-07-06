@@ -10,6 +10,7 @@ use yii\web\Controller;
  *
  * @author nekitak46
  */
+
 class AppController extends Controller
 {
     //put your code here
