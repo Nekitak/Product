@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+ 
+
 /**
  * Description of PointOfSale
  *
@@ -9,7 +11,6 @@ namespace app\models;
  */
 
 
-class PointOfSale 
+class PointOfSale extends AppModel
 {
-    //put your code here
 }

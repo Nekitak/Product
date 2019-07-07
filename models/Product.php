@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+ 
 /**
  * Description of Product
  *
@@ -9,7 +10,6 @@ namespace app\models;
  */
 
 
-class Product 
+class Product extends AppModel
 {
-    //put your code here
 }

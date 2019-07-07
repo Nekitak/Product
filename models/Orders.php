@@ -2,12 +2,15 @@
 
 namespace app\models;
 
+ 
+
+
 /**
  * Description of Orders
  *
  * @author nekitak46
  */
-class Orders 
+
+class Orders extends AppModel
 {
-    //put your code here
 }
