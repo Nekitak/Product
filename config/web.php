@@ -19,7 +19,26 @@ $config = [
             'cookieValidationKey' => '4A5slO6LOC1MOSN678qru0as0HtP_IPq',
             'baseUrl' => $baseUrl,
         ],
-         
+        
+        'view' => [
+            'class' => 'yii\web\View',
+            'renderers' => [
+                'twig' => [
+                    'class' => 'yii\twig\ViewRenderer',
+                    'cachePath' => '@runtime/Twig/cache',
+                    // Array of twig options:
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'html' => ['class' => '\yii\helpers\Html'],
+                    ],
+                    'uses' => ['yii\bootstrap'],
+                ],
+                // ...
+            ],
+        ],
+        
         'baseUrl' => '',
         'cache' => [
             'class' => 'yii\caching\FileCache',

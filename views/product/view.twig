@@ -6,7 +6,9 @@ use yii\widgets\LinkPager;
 <h1>Products</h1>
 
 <div class="row">
-     <?=$id; ?>
+   <?php  $session = Yii::$app->session;  
+     $language = $session->get('language');?>
+ <?php print_r($language); ?>
 </div>
  
 

@@ -5,14 +5,14 @@ namespace app\controllers;
  
 use app\models\Product;
 use yii\data\Pagination;
-
+use yii;
 
 /**
  * Description of ProductController
  *
  * @author nekitak46
  */
-
+ 
 
 class ProductController extends AppController
 {
@@ -32,19 +32,28 @@ class ProductController extends AppController
             ->limit($pagination->limit)
             ->all();
         
-        return $this->render('index', [
+        return $this->render('index.twig',  [
             'products' => $products,
-            'pagination' => $pagination,
-            'session' , $session,
-            
-           
+            'pagination' => $pagination,  
         ]);
     }
     
     public function actionAdd($id)
-    {
+    {   
+          
         
-        return $this->redirect(['index']);
-             
+       
+         $_SESSION['test'];
+
+         $_SESSION['test'] = 2;
+         echo $_SESSION['test'];
+//        
+//           $cart = $session->get($id);
+//       
+//       
+//        echo '<pre>';
+//        print_r($cart);
+//        echo '</pre>';
+       // $this->redirect('index');  
     }
 }

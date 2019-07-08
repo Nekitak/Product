@@ -12,4 +12,8 @@ namespace app\models;
 
 class Product extends AppModel
 {
+    public function add($id)
+    {
+        $session = Yii::session();
+    }
 }

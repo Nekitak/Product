@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use Yii;
 /**
  * Description of AppModel
  *
@@ -10,4 +11,5 @@ use yii\db\ActiveRecord;
  */
 class AppModel extends ActiveRecord
 {
+    
 }
