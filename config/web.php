@@ -20,22 +20,20 @@ $config = [
             'baseUrl' => $baseUrl,
         ],
         
-        'view' => [
+       'view' => [
             'class' => 'yii\web\View',
             'renderers' => [
                 'twig' => [
                     'class' => 'yii\twig\ViewRenderer',
                     'cachePath' => '@runtime/Twig/cache',
-                    // Array of twig options:
                     'options' => [
                         'auto_reload' => true,
                     ],
                     'globals' => [
-                        'html' => ['class' => '\yii\helpers\Html'],
+                        'Url' => ['class' => '\yii\helpers\Url'],
+                        'MyClass' => ['class' => '\frontend\models\MyClass'],
                     ],
-                    'uses' => ['yii\bootstrap'],
                 ],
-                // ...
             ],
         ],
         
@@ -73,7 +71,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'product/<id:\d+>' => 'product/view',
+                
                 
             ],
         ],

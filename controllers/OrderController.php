@@ -12,6 +12,6 @@ class OrderController extends AppController
 {
     public function actionIndex()
     {
-         
+           return $this->render('index.twig');
     }
 }

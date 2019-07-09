@@ -39,11 +39,11 @@ AppAsset::register($this);
      
      $menuItemsLeft = [
          ['label' => 'Products', 'url' => ['/product/index']],
+         ['label' => 'Cart', 'url' => ['/product/cart']],
      ];
      
      $menuItemsRight = [
          ['label' => 'Home', 'url' => ['/site/index']],
-         ['label' => 'About', 'url' => ['/site/about']],
 //         ['label' => 'Contact', 'url' => ['/site/contact']],
      ];
 

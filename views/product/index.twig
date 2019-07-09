@@ -8,9 +8,9 @@
     {% for product in products %}
         <div class="col-sm-3 product_block">
             <img class="image" src="{{path(['../../web/images/vRbLKMSfs5o.jpg'])}}">  
-            <h4 class="block1">{{product.name}}</h4> 
+            <h4 class="block1"><a href="{{path(['product/info'], {'id' : product.id})}}">{{product.name}}</a></h4> 
             <i class="block1">цена:{{product.price}}</i><br/>
-            <a href="{{path(['product/add'], {'id' : product.id})}}">купить</a>         
+            <a class="block1" href="{{path(['product/add'], {'id' : product.id})}}"><button class="btn">В корзину</button></a>         
         </div>
     {% endfor %}
 </div>

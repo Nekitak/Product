@@ -10,6 +10,12 @@ use app\models\SignupForm;
 class SiteController  extends AppController
 {
     
+     
+    
+    public function actionDump()
+    {
+        print_r($_POST);
+    }
 
     /**
      * Displays homepage.
@@ -17,8 +23,8 @@ class SiteController  extends AppController
      * @return string
      */
     public function actionIndex()
-    {
-        return $this->render('index');
+    {   
+        return $this->render('index.twig');
     }
 
     /**
@@ -73,16 +79,7 @@ class SiteController  extends AppController
 //        ]);
 //    }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-    
+   
     
     /**
      * SignUp action

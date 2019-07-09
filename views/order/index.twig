@@ -1,0 +1,40 @@
+{{use('yii\helpers\Html')}} 
+{{ use('yii/widgets/ActiveForm') }}
+ 
+ 
+
+
+<div class="container">
+    <div class="col-sm-3">
+{% set form = active_form_begin({
+    'id' : 'login-form',
+    'method' : "POST",
+    'action' : 'dump',
+    'options' : {'class' : 'form-group'},
+}) %}
+
+ 
+<label>Name</label>
+<input  class="form-control" type="text" name="lel"><br/>
+ 
+<label>Email</label>
+<input class="form-control" type="email" name="lel"><br/>
+
+<label>Название</label>
+<input class="form-control" type="email" name="lel"><br/>
+
+<label>Цена</label>
+<input class="form-control" type="email" name="lel"><br/>
+
+<label>Коилчество</label>
+<input class="form-control" type="email" name="lel"><br/>
+
+<div class="form-group">
+   <input type="submit" value="Создать сделку" class="btn btn-primary" />
+</div>
+
+{{ active_form_end() }}
+
+
+    </div>
+</div>
