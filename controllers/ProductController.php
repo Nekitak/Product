@@ -3,7 +3,8 @@
 namespace app\controllers;
 
 use app\models\Product;
-use yii\data\Pagination;
+use  app\models\Pointofsale;
+ 
 use yii;
 
 /**
@@ -14,24 +15,27 @@ use yii;
 class ProductController extends AppController {
 
     public function actionIndex() {
-        $query = Product::find();
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 8,
-            'totalCount' => $query->count(),
-        ]);
-
-        $products = $query->orderBy('id')
-                ->offset($pagination->offset)
-                ->limit($pagination->limit)
-                ->all();
-
+        
+        //return all active pointOfSale
+        $pointOfSale = Pointofsale::find()->all();
+        
+        //return productList and pagination
+        $products = Product::getProuctList();
+        
+        
         return $this->render('index.twig', [
-                    'products' => $products,
-                    'pagination' => $pagination,
+                    'products' => $products[0],
+                    'pagination' => $products[1],
+                    'pointOfSale' => $pointOfSale,
         ]);
     }
-
+    
+    public function actionPoint()
+    { 
+        $_SESSION['select'] = [$_POST['select']];
+      
+        $this->redirect('index');  
+    }
     public function actionAdd($id)
     {
         $id = intval($id);

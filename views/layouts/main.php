@@ -44,7 +44,6 @@ AppAsset::register($this);
      
      $menuItemsRight = [
          ['label' => 'Home', 'url' => ['/site/index']],
-//         ['label' => 'Contact', 'url' => ['/site/contact']],
      ];
 
      if (Yii::$app->user->isGuest) {

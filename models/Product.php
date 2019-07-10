@@ -9,7 +9,7 @@ namespace app\models;
  * @author nekitak46
  */
 
-
+use yii\data\Pagination;
 class Product extends AppModel
 {
     public static function add($id)
@@ -39,7 +39,6 @@ class Product extends AppModel
         
     }
     
-    
     public static function getCart()
     {
         $session = Yii::$app->session;
@@ -52,5 +51,23 @@ class Product extends AppModel
         
         
         return $items;
+    }
+    
+    public static function getProuctList()
+    {
+        $query = Product::find();
+        
+        $pagination = new Pagination([
+            'defaultPageSize' => 8,
+            'totalCount' => $query->count(),
+        ]);
+        
+        $products = $query->orderBy('id')
+                ->offset($pagination->offset)
+                ->limit($pagination->limit)
+                ->where('location_id = :id', [':id' => $_SESSION['select']])
+                ->all();
+        
+        return [$products , $pagination];
     }
 }

@@ -2,8 +2,30 @@
 {{use('yii\widgets\LinkPager')}}
 {{use('yii/widgets/ActiveForm')}}
  
-<h1>Products</h1>
- 
+
+<h1>Products</h1> 
+
+{% set form = active_form_begin
+    ({
+        'id' : 'select_location',
+        'method' : "POST",
+        'action' : 'point', 
+    }) 
+%}
+    <div class="col-sm-2">
+        <select class="form-control" name="select" > 
+            {% for point in pointOfSale %}
+            <option value="{{point.id}}">точка:{{point.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+       <input type="submit" value="Выбрать" class="btn btn-primary" />
+    </div>
+
+{{ active_form_end() }}
+
+
 <div class="row">
     {% for product in products %}
         <div class="col-sm-3 product_block">
