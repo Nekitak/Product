@@ -3,14 +3,22 @@
 
 namespace app\controllers;
 
-use app\models\Product;
+use app\models\Orders;
+use  app\models\Pointofsale;
+
 /**
  * Description of OrderController
- *
+ * 
+ *  @param $orderBucket[0] - json encode product list , contains product name and count in cart
+ *  @param $orderBucket[1] - totalPrice
+ * 
  * @author nekitak46
  */
 class OrderController extends AppController
 {
+     
+
+
     public function actionIndex()
     {
         return $this->render('index.twig');
@@ -23,20 +31,9 @@ class OrderController extends AppController
     
     public function actionOrder()
     {
-         
-        $cart = Product::getCart();
-       
-        $orderBuccket = [];
-        $orderItem = [];
-        
-        foreach($cart as $item){
-            $orderItem['name'] = $item->name; 
-             $orderItem['count'] = $_SESSION['cart'][$item->id]['count']; 
-              $orderBuccket[] = $orderItem ;
-              unset($orderItem);
-        }
-        $orderBuccket = json_encode($orderBuccket);
-        echo'<pre>';
-        print_r($orderBuccket);
+        $order = (new Orders)->newOrder();
+        return $this->redirect('index'); 
     }
+    
+    
 }
