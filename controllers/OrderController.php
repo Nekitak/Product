@@ -4,7 +4,7 @@
 namespace app\controllers;
 
 use app\models\Orders;
-use  app\models\Pointofsale;
+ 
 
 /**
  * Description of OrderController
@@ -32,8 +32,24 @@ class OrderController extends AppController
     public function actionOrder()
     {
         $order = (new Orders)->newOrder();
-        return $this->redirect('index'); 
+        unset($_POST);
+        return $this->goHome();
     }
     
+    public function actionTracking()
+    {   
+        $orders = (new Orders)->getTracking();
+        
+        // to do: view of order list and status description , for example: status 1 == on way , and so on
+        
+        return $this->render('tracking.twig' , ['orders' => $orders ]);
+    }
     
+    public function actionCancel($id)
+    {
+        $id = intval($id);
+        Orders::cancel($id);
+        $this->redirect('tracking');     
+    }
+   
 }

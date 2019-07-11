@@ -4,7 +4,8 @@
  
 <h1>Cart</h1>
 
-<div class="row">
+<div class="row" >
+    <div class="col-sm-6" >
     <table>  
          <tr>
                 <th class="table">Название</th>
@@ -20,4 +21,9 @@
         </tr>
     {% endfor %}
     </table>
+    </div>
+    <div class="col-sm-2">
+        <a class="block2" href="{{path(['order/buy'])}}" ><button class="btn">Оформить заказ</button></a> 
+    </div>
 </div>
+   

@@ -40,6 +40,7 @@ AppAsset::register($this);
      $menuItemsLeft = [
          ['label' => 'Products', 'url' => ['/product/index']],
          ['label' => 'Cart', 'url' => ['/product/cart']],
+         ['label' => 'orders', 'url' => ['/order/index']],
      ];
      
      $menuItemsRight = [
@@ -50,6 +51,7 @@ AppAsset::register($this);
          $menuItemsRight[] = ['label' => 'Signup', 'url' => ['/site/signup']];
          $menuItemsRight[] = ['label' => 'Login', 'url' => ['/site/login']];
      } else {
+         //$menuItemsRight[] = ['label' => 'OrdersAndDeals', 'url' => ['/site/login']];
          $menuItemsRight[] = '<li>'
              . Html::beginForm(['/site/logout'], 'post')
              . Html::submitButton(

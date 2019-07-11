@@ -16,6 +16,13 @@ class Orders extends AppModel
     protected $email;
     protected $mobail_phone;
     
+    public static function cancel($id)
+    {
+        $order = self::findOne($id);
+        $order->status = 0;
+        $order->save();
+         
+    }
     
     public function ruels()
     {
@@ -59,9 +66,10 @@ class Orders extends AppModel
         $this->email = $_POST['email'];
         $this->mobail_phone = $_POST['mobail_phone'];
         
-        $userData = [$this->uesrname ,  $this->email , $this->mobail_phone];
-        $userData = json_encode($userData);
-        
+        $userData = [ 'name' => $this->uesrname ,
+                       'email' => $this->email , 
+                        'mobail_phone' => $this->mobail_phone];
+ 
         return $userData;
     }
     
@@ -77,9 +85,25 @@ class Orders extends AppModel
         $this->status = 1;
         $this->order_type = 1;
         $this->from_info = $point->name;
-        $this->to_info  = $userData;
+        $this->to_info_name  = $userData['name'];
+        $this->to_info_email  = $userData['email'];
+        $this->to_info_mobail_phone  = $userData['mobail_phone'];
         $this->save();
     }
     
+    public function getTracking()
+    {
+        $this->uesrname = $_POST['name'];
+        $this->email = $_POST['email'];
+        
+        $orders = self::find()
+                ->where( 'to_info_name = :name'  , [':name' => $_POST['name']])
+                ->where( 'to_info_email = :email'  , [':email' => $_POST['email']])
+                ->where('status = ' . 1)
+                ->select('product_list , order_id , status , total_price')
+                ->all();
+ 
+        return $orders;
+    }
     
 }
