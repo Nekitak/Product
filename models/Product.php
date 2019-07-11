@@ -35,8 +35,7 @@ class Product extends AppModel
                 $_SESSION['cart'][$id] = ['count' => $count];
             } 
         }
-        
-        
+               
     }
     
     public static function getCart()

@@ -10,13 +10,6 @@ use app\models\SignupForm;
 class SiteController  extends AppController
 {
     
-     
-    
-    public function actionDump()
-    {
-        print_r($_POST);
-    }
-
     /**
      * Displays homepage.
      *

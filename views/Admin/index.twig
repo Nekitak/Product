@@ -1,0 +1,28 @@
+{{use('yii\helpers\Html')}}
+{{use('yii\widgets\LinkPager')}}
+
+
+
+
+<div class="row" >
+    <div class="col-sm-6" >
+    <table>  
+         <tr>
+                <th class="table">Название</th>
+                <th class="table">Цена</th>
+                <th class="table">Количество</th>
+            </tr>
+    {% for product in products %}
+        <tr>   
+           <td class="table"> <h4 class="block1">{{product.name}}</h4> </td>
+            <td class="table"> <i class="block1">{{product.price}}</i> </td>
+           <td class="table"> <p class="block1">{{ count[item.id]}}</p></td>
+           <td class="table"> <a class="block1" href="{{path(['product/del'], {'id' : item.id})}}"><button class="btn">Удалить</button></a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+    <div class="col-sm-2">
+        <a class="block2" href="{{path(['order/buy'])}}" ><button class="btn">Оформить заказ</button></a> 
+    </div>
+</div>

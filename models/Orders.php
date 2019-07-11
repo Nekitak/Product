@@ -21,7 +21,7 @@ class Orders extends AppModel
         $order = self::findOne($id);
         $order->status = 0;
         $order->save();
-         
+       
     }
     
     public function ruels()
@@ -46,10 +46,13 @@ class Orders extends AppModel
         $orderItem = [];
         $totalPrice  = 0;
         
+        $productList = Product::find()->all();
+        
+        
         foreach($cart as $item){
             $orderItem['name'] = $item->name; 
              $orderItem['count'] = $_SESSION['cart'][$item->id]['count']; 
-             $totalPrice +=  $item->price*$orderItem['count'];
+              $totalPrice +=  $item->price*$orderItem['count'];
                $orderBucket[] = $orderItem ;
    
             unset($orderItem);
@@ -64,18 +67,15 @@ class Orders extends AppModel
     {
         $this->uesrname = $_POST['name'];
         $this->email = $_POST['email'];
-        $this->mobail_phone = $_POST['mobail_phone'];
         
         $userData = [ 'name' => $this->uesrname ,
-                       'email' => $this->email , 
-                        'mobail_phone' => $this->mobail_phone];
+                       'email' => $this->email ,];
  
         return $userData;
     }
     
     public function newOrder()
     {
-
         $orderBucket = $this->prepareOrder();
         $userData = $this->prepareUserData();
         $point = Pointofsale::findOne($_SESSION['select'][0]);
@@ -87,8 +87,8 @@ class Orders extends AppModel
         $this->from_info = $point->name;
         $this->to_info_name  = $userData['name'];
         $this->to_info_email  = $userData['email'];
-        $this->to_info_mobail_phone  = $userData['mobail_phone'];
         $this->save();
+        
     }
     
     public function getTracking()
@@ -98,7 +98,6 @@ class Orders extends AppModel
         
         $orders = self::find()
                 ->where( 'to_info_name = :name'  , [':name' => $_POST['name']])
-                ->where( 'to_info_email = :email'  , [':email' => $_POST['email']])
                 ->where('status = ' . 1)
                 ->select('product_list , order_id , status , total_price')
                 ->all();
