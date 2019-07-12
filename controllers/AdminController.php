@@ -2,8 +2,9 @@
 
 namespace app\controllers;
 
-use Yii;
+ 
 use app\models\Product;
+use app\models\PointOfSale;
 
 /**
  * Description of AdminController
@@ -15,14 +16,22 @@ use app\models\Product;
 class AdminController extends AppController
 {
     
-    public function actionIndex()
+    public function actionPoint()
     {   
-        $products  = Product::find()->all();
-        
-        echo '<pre>';
-        print_r($products);
-        
-        
-//    /    return $this->render('index.twig' , ['products' => $products]);
+         $model = (new Product)->actionPoint();
+         
+         $this->redirect('audit');
+    }
+    
+    public function actionAudit()
+    {
+         
+        $products = (new Product)->ActiveProduct();
+        $pointOfSale = Pointofsale::find()->all();
+         
+        return $this->render('audit.twig' , [
+                    'products' => $products,
+                    'pointOfSale' => $pointOfSale,
+        ]);
     }
 }

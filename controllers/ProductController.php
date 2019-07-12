@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\Product;
-use  app\models\Pointofsale;
+use app\models\Pointofsale;
  
 use yii;
 
@@ -32,7 +32,7 @@ class ProductController extends AppController {
     
     public function actionPoint()
     { 
-        $_SESSION['select'] = [$_POST['select']];
+        $model = (new Product)->actionPoint();
       
         $this->redirect('index');  
     }

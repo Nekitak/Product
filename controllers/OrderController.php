@@ -4,7 +4,8 @@
 namespace app\controllers;
 
 use app\models\Orders;
- 
+use app\models\Deals;
+ use yii;
 
 /**
  * Description of OrderController
@@ -32,7 +33,8 @@ class OrderController extends AppController
     public function actionOrder()
     {
         $order = (new Orders)->newOrder();
-        unset($_POST);
+        \app\models\Product::clearCart();
+        unset($_POST); 
         return $this->goHome();
     }
     
@@ -52,4 +54,14 @@ class OrderController extends AppController
         $this->redirect('tracking');     
     }
    
+    public  function actionNewdeal()
+    {  
+        return $this->render('deal.twig');
+    }
+    
+     public  function actionCreate()
+     {
+        $order = (new Deals)->newDeal();
+        return $this->goHome();
+     }
 }

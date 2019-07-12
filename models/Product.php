@@ -2,7 +2,7 @@
 
 namespace app\models;
 
- use yii;
+use yii;
 /**
  * Description of Product
  *
@@ -52,6 +52,12 @@ class Product extends AppModel
         return $items;
     }
     
+    public static function clearCart()
+    {
+        $session = Yii::$app->session;
+        $session->destroy();
+    }
+    
     public static function getProuctList()
     {
         $query = Product::find();
@@ -60,7 +66,7 @@ class Product extends AppModel
             'defaultPageSize' => 8,
             'totalCount' => $query->count(),
         ]);
-        
+            
         $products = $query->orderBy('id')
                 ->offset($pagination->offset)
                 ->limit($pagination->limit)
@@ -69,4 +75,20 @@ class Product extends AppModel
         
         return [$products , $pagination];
     }
+    
+    public function ActiveProduct()
+    {
+        $products = Self::find()
+                    ->where('location_id = :id', [':id' => $_SESSION['select']])
+                    ->all();
+        
+        
+        foreach($products as $product){
+            $product-> count > 0 ? $productA[] = $product : null;
+        }
+        
+        return $productA;
+    }
+    
+    
 }

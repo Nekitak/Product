@@ -27,6 +27,7 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
+    const STATUS_ADMIN = 1;
     const STATUS_ACTIVE = 10;
  
     /**
@@ -137,5 +138,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
- 
+    
+    public static function isAdmin()
+    {
+        $user = User::findOne($_SESSION['__id']);
+        if($user->Admin == self::STATUS_ADMIN){
+            return true;
+        }else{
+            return false;
+        }
+         
+    }
 }

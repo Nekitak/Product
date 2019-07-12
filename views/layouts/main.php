@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\User;
 
 AppAsset::register($this);
 ?>
@@ -50,6 +51,7 @@ AppAsset::register($this);
      if (Yii::$app->user->isGuest) {
          $menuItemsRight[] = ['label' => 'Signup', 'url' => ['/site/signup']];
          $menuItemsRight[] = ['label' => 'Login', 'url' => ['/site/login']];
+          
      } else {
          //$menuItemsRight[] = ['label' => 'OrdersAndDeals', 'url' => ['/site/login']];
          $menuItemsRight[] = '<li>'
@@ -60,6 +62,9 @@ AppAsset::register($this);
              )
              . Html::endForm()
              . '</li>';
+         if(User::isAdmin()){
+             $menuItemsRight[] = ['label' => 'Audit', 'url' => ['/admin/audit']];
+         }
      }
 
      echo Nav::widget([

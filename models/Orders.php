@@ -4,6 +4,9 @@ namespace app\models;
 
 use app\models\Product; 
 use  app\models\Pointofsale;
+ 
+ 
+ 
 /**
  * Description of Orders
  *
@@ -12,9 +15,6 @@ use  app\models\Pointofsale;
 
 class Orders extends AppModel
 {
-    protected $uesrname;
-    protected $email;
-    protected $mobail_phone;
     
     public static function cancel($id)
     {
@@ -63,15 +63,10 @@ class Orders extends AppModel
         return [$orderBucket , $totalPrice];
     }
     
-    public  function prepareUserData()
+    public function  prepareDeal()
     {
-        $this->uesrname = $_POST['name'];
-        $this->email = $_POST['email'];
-        
-        $userData = [ 'name' => $this->uesrname ,
-                       'email' => $this->email ,];
- 
-        return $userData;
+        echo '<pre>';
+        print_r($_POST);
     }
     
     public function newOrder()
@@ -93,16 +88,21 @@ class Orders extends AppModel
     
     public function getTracking()
     {
-        $this->uesrname = $_POST['name'];
-        $this->email = $_POST['email'];
+        $userData = $this->prepareUserData();
         
         $orders = self::find()
-                ->where( 'to_info_name = :name'  , [':name' => $_POST['name']])
-                ->where('status = ' . 1)
+                ->where( 'to_info_name = :name'  , [':name' => $userData['name']])
                 ->select('product_list , order_id , status , total_price')
                 ->all();
- 
-        return $orders;
+        
+        
+        foreach($orders as $order){
+            if($order->status == 1)
+                $ordersA[] = $order;
+        }
+        
+        return $ordersA;
     }
     
+   
 }

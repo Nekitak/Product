@@ -9,7 +9,7 @@
 {% set form = active_form_begin({
     'id' : 'order_form',
     'method' : "POST",
-    'action' : 'dump',
+    'action' : 'create',
 }) %}
 
  
@@ -29,7 +29,7 @@
 <input class="form-control" type="text" name="product_count"><br/>
 
 <label>Описание</label>
-<input class="form-control" type="text" name="product_descrtiption"><br/>
+<input class="form-control" type="text" name="product_description"><br/>
 
 <div class="form-group">
    <input type="submit" value="Создать сделку" class="btn btn-primary" />
