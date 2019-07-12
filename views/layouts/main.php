@@ -9,11 +9,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\User;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
@@ -28,33 +29,54 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
+        NavBar::begin([
+         'brandLabel' => 'Product',
+         'brandUrl' => Yii::$app->homeUrl,
+         'options' => [
+             'class' => 'navbar-inverse navbar-fixed-top',
+         ],
+          
+     ]);
+     
+     $menuItemsLeft = [
+         ['label' => 'Products', 'url' => ['/product/index']],
+         ['label' => 'Cart', 'url' => ['/product/cart']],
+         ['label' => 'orders', 'url' => ['/order/index']],
+     ];
+     
+     $menuItemsRight = [
+         ['label' => 'Home', 'url' => ['/site/index']],
+     ];
+
+     if (Yii::$app->user->isGuest) {
+         $menuItemsRight[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+         $menuItemsRight[] = ['label' => 'Login', 'url' => ['/site/login']];
+          
+     } else {
+         //$menuItemsRight[] = ['label' => 'OrdersAndDeals', 'url' => ['/site/login']];
+         $menuItemsRight[] = '<li>'
+             . Html::beginForm(['/site/logout'], 'post')
+             . Html::submitButton(
+                 'Logout (' . Yii::$app->user->identity->username . ')',
+                 ['class' => 'btn btn-link logout']
+             )
+             . Html::endForm()
+             . '</li>';
+         if(User::isAdmin()){
+             $menuItemsRight[] = ['label' => 'Audit', 'url' => ['/admin/audit']];
+         }
+     }
+
+     echo Nav::widget([
+         'options' => ['class' => 'navbar-nav navbar-right'],
+         'items' => $menuItemsRight,
+     ]);
+     
+     echo Nav::widget([
+         'options' => ['class' => 'navbar-nav navbar-left'],
+         'items' => $menuItemsLeft,
+     ]);
+
     NavBar::end();
     ?>
 
@@ -69,9 +91,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+    
     </div>
 </footer>
 

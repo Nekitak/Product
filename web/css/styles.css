@@ -1,0 +1,44 @@
+.block1{
+    margin-left:35%;
+}
+
+
+a.block1{
+    margin-left:31%;
+}
+
+.product_block{
+    margin-top:5%;
+}
+
+.image{
+    width: 100%;
+}
+
+.table{
+    width: 100px;
+}
+
+th{
+   text-align: center;    
+}
+
+.make_deal{
+    margin-top:20%;
+     
+}
+
+.make_deal_button{
+         width: 150%;
+         height: 50px;
+}
+
+div.action_list{
+    display: flex;
+    justify-content: space-between;
+}
+
+a.block2{
+     position: absolute;
+     margin-top: 12%;
+}

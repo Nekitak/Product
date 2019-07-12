@@ -1,5 +1,7 @@
 <?php
 
+
+$baseUrl = str_replace('/web', '', (new \yii\web\Request)->getBaseUrl());
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -15,7 +17,27 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '4A5slO6LOC1MOSN678qru0as0HtP_IPq',
+            'baseUrl' => $baseUrl,
         ],
+        
+       'view' => [
+            'class' => 'yii\web\View',
+            'renderers' => [
+                'twig' => [
+                    'class' => 'yii\twig\ViewRenderer',
+                    'cachePath' => '@runtime/Twig/cache',
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'Url' => ['class' => '\yii\helpers\Url'],
+                        'MyClass' => ['class' => '\frontend\models\MyClass'],
+                    ],
+                ],
+            ],
+        ],
+        
+        'baseUrl' => '',
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -43,14 +65,17 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+         
         'urlManager' => [
+            'baseUrl' => $baseUrl,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                
+                
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
