@@ -10,52 +10,27 @@ use yii;
  */
 
 use yii\data\Pagination;
+
 class Product extends AppModel
 {
     public static function add($id)
     {
-    
-       if($count = $_SESSION['cart'][$id]['count']){
-            $count++;
-            $_SESSION['cart'][$id] = ['count' => $count];
-       }else{
-           $_SESSION['cart'][$id] = ['count' => 1];
-       }
-  
+        Yii::$app->cart->add($id);
     }
     
     public static function del($id)
     {
-    
-        if($count = $_SESSION['cart'][$id]['count']){ 
-            if($count == 1){
-                unset($_SESSION['cart'][$id]);
-            }else{ 
-                $count--;
-                $_SESSION['cart'][$id] = ['count' => $count];
-            } 
-        }
-               
+        Yii::$app->cart->del($id);         
     }
     
     public static function getCart()
-    {
-        $session = Yii::$app->session;
-        $cart = array_keys($session->get('cart'));
-        $items = [];
-       
-        foreach($cart as $key){
-             $items[] = Product::findOne($key);      
-        }
-        
-        
-        return $items;
+    {       
+        return Yii::$app->cart->getCart();
     }
     
-    public static function clearCart()
+    public static function clearCart()  
     {
-        $session = Yii::$app->session;
-        $session->destroy();
+        (Yii::$app->session)->remove('cart');
     }
     
     public static function getProuctList()
@@ -70,24 +45,19 @@ class Product extends AppModel
         $products = $query->orderBy('id')
                 ->offset($pagination->offset)
                 ->limit($pagination->limit)
-                ->where('location_id = :id', [':id' => $_SESSION['select']])
+                ->where(['location_id' => $_SESSION['select']])
                 ->all();
         
-        return [$products , $pagination];
+        return ['products' => $products , 'pagination' => $pagination];
     }
     
     public function ActiveProduct()
     {
         $products = Self::find()
-                    ->where('location_id = :id', [':id' => $_SESSION['select']])
+                    ->where(['location_id' => $_SESSION['select'] , 'count' > 0])
                     ->all();
-        
-        
-        foreach($products as $product){
-            $product-> count > 0 ? $productA[] = $product : null;
-        }
-        
-        return $productA;
+ 
+        return $products;
     }
     
     

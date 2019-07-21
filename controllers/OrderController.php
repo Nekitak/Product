@@ -5,7 +5,7 @@ namespace app\controllers;
 
 use app\models\Orders;
 use app\models\Deals;
- use yii;
+use yii;
 
 /**
  * Description of OrderController
@@ -22,19 +22,27 @@ class OrderController extends AppController
 
     public function actionIndex()
     {
-        return $this->render('index.twig');
+        $model = new Orders();
+         
+//        if ($model->load(Yii::$app->request->post())) {
+//             print_r(Yii::$app->request->post());
+//        }
+        
+        return $this->render('index.php',
+                            ['model' => $model]);
     }
     
     public function actionBuy()
     {
-        return $this->render('buy.twig');
+        $model = new Orders();
+        return $this->render('buy.php' , 
+                             ['model' => $model]);
     }
     
-    public function actionOrder()
+    public function actionNewBuyOrder()
     {
         $order = (new Orders)->newOrder();
-        \app\models\Product::clearCart();
-        unset($_POST); 
+        
         return $this->goHome();
     }
     
@@ -44,7 +52,7 @@ class OrderController extends AppController
         
         // to do: view of order list and status description , for example: status 1 == on way , and so on
         
-        return $this->render('tracking.twig' , ['orders' => $orders ]);
+        return $this->render('tracking.php' , ['orders' => $orders ]);
     }
     
     public function actionCancel($id)
@@ -54,14 +62,16 @@ class OrderController extends AppController
         $this->redirect('tracking');     
     }
    
-    public  function actionNewdeal()
+    public  function actionNewDealPage()
     {  
-        return $this->render('deal.twig');
+        $model = new Orders();
+        return $this->render('deal.php',
+                             ['model' => $model]);
     }
     
-     public  function actionCreate()
+     public  function actionCreateNewDeal()
      {
-        $order = (new Deals)->newDeal();
+        $order = (new Deals())->newDeal();
         return $this->goHome();
      }
 }

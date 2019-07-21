@@ -1,0 +1,10 @@
+ 
+ 
+ 
+
+<div class="col-sm-3 product_block">
+    <img class="image" src="../../web/images/vRbLKMSfs5o.jpg">  
+    <h4 class="block1"><?= $product->name ?></h4> 
+    <i class="block1">цена:<?= $product->price ?></i><br/>
+    <i><?= $product->description ?></i>
+</div> 

@@ -19,6 +19,9 @@ $config = [
             'cookieValidationKey' => '4A5slO6LOC1MOSN678qru0as0HtP_IPq',
             'baseUrl' => $baseUrl,
         ],
+        'cart' => [
+            'class' => 'app\components\Cart'
+        ],
         
        'view' => [
             'class' => 'yii\web\View',
@@ -71,7 +74,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                
                 
             ],
         ],
